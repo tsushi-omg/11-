@@ -1,0 +1,76 @@
+
+body{
+    background-color: #000000;
+}
+
+.buttonOn{
+    background-color: rgb(214, 214, 214) !important;
+}
+
+.buttonOff{
+    background-color: rgb(129, 129, 129) !important;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+/* border-bottom: solid; border-top: none; border-right: none; border-left: none; background-color: transparent; color: aliceblue; */
+
+input[type="text"]{
+    border-bottom: solid 1px aliceblue;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    /* color: aliceblue; */
+}
+
+#dictionary{
+    overflow:auto;
+    width:580px;
+    height:780px;
+    padding:5px;
+    border:1px solid #444444;
+    background-color:#181818;
+}
+
+#addWindow{
+    position: absolute;
+    width: 50%;
+    height: 30%;
+    left: 25%;
+    top: 30%;
+    border: 1px solid rgb(108, 108, 108);
+    background-color: black;
+}
+
+#addCloseButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+}
+
+#addButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+}
+
+#reloadButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+}
+
+#submitButton:hover{
+    fill: lightgreen;
+}
+
+.divData{
+    color: rgb(255, 255, 255);
+    height: 50px;
+    text-decoration: underline;
+    user-select: none;
+    cursor: pointer;
+}
