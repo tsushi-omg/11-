@@ -70,6 +70,7 @@ input[type="text"]{
 .divData{
     color: rgb(255, 255, 255);
     text-decoration: underline;
+    height: 50px;
     user-select: none;
     cursor: pointer;
 }
