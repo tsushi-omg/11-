@@ -109,6 +109,9 @@ function load(){
         start=data.indexOf("!===!",data.indexOf("!===!",start)+7);
         
         //生成  target="_blank" rel="noopener noreferrer" href="
+        const divElement = document.createElement('div');
+        dictionary.appendChild(divElement);
+        
         const element = document.createElement('a');
         element.textContent=title;
         element.name = 'divData';
@@ -116,7 +119,7 @@ function load(){
         element.target = "_blank";
         element.rel = "noopener noreferrer";
         element.href = link;
-        dictionary.appendChild(element); 
+        divElement.appendChild(element); 
 
     }
 
