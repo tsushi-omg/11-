@@ -108,14 +108,14 @@ function load(){
         //位置更新--ook
         start=data.indexOf("!===!",data.indexOf("!===!",start)+7);
         
-        //生成
-        const element = document.createElement('div');
+        //生成  target="_blank" rel="noopener noreferrer" href="
+        const element = document.createElement('a');
         element.textContent=title;
         element.name = 'divData';
         element.classList.add('divData');
-        element.onclick=function() {
-            window.open(link, '_blank', 'noopener,noreferrer');
-        };
+        element.target = "_blank";
+        element.rel = "noopener noreferrer";
+        element.href = link;
         dictionary.appendChild(element); 
 
     }
