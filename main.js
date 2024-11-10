@@ -361,22 +361,7 @@ function inputEvent(){
 
 function inputEventMemoBunrui(){
     bunruiSort.addEventListener("input",function(event){
-
-        var array = document.getElementsByClassName('memoContent');
-
         judge();
-
-        function judge(){
-            for(let i = 0; i < array.length; i++){
-                if(array[i].children[1].textContent.indexOf(bunruiSort.value) != -1){
-                    array[i].hidden=false;
-                }else{
-                    array[i].hidden=true;
-                }
-            }
-        }
-
-
     });
 }
 
@@ -384,21 +369,7 @@ function inputEventMemoBunrui(){
 
 function inputEventMemoNaiyo(){
     memoSort.addEventListener("input",function(event){
-
-        var array = document.getElementsByClassName('memoContent');
-
         judge();
-
-        function judge(){
-            for(let i = 0; i < array.length; i++){
-                if(array[i].children[2].textContent.indexOf(memoSort.value) != -1){
-                    array[i].hidden=false;
-                }else{
-                    array[i].hidden=true;
-                }
-            }
-        }
-
     });
 
 }
@@ -407,23 +378,20 @@ function inputEventMemoNaiyo(){
 
 function inputEventMemoJotai(){
     zyotaiSort.addEventListener("input",function(event){
-
-        var array = document.getElementsByClassName('memoContent');
-
         judge();
-
-        function judge(){
-            for(let i = 0; i < array.length; i++){
-                if(array[i].children[3].textContent.indexOf(zyotaiSort.value) != -1){
-                    array[i].hidden=false;
-                }else{
-                    array[i].hidden=true;
-                }
-            }
-        }
-
     });
 
+}
+
+function judge(){
+    var array = document.getElementsByClassName('memoContent');
+    for(let i = 0; i < array.length; i++){
+        if((array[i].children[1].textContent.indexOf(bunruiSort.value) != -1) && (array[i].children[2].textContent.indexOf(memoSort.value) != -1) && (array[i].children[3].textContent.indexOf(zyotaiSort.value) != -1)){
+            array[i].hidden=false;
+        }else{
+            array[i].hidden=true;
+        }
+    }
 }
 
 //ctrl + enterでキーワードにフォーカス
