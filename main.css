@@ -1,7 +1,13 @@
-
+/* 
 body{
     background-color: #000000;
+} */
+
+body {
+    /* background-image: url('https://images.pexels.com/photos/7120851/pexels-photo-7120851.jpeg?auto=compress&cs=tinysrgb&w=600'); */
+    background-image: url('https://images.pexels.com/photos/8903355/pexels-photo-8903355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
 }
+
 
 .buttonOn{
     background-color: rgb(214, 214, 214) !important;
@@ -35,7 +41,9 @@ input[type="text"]{
     height:780px;
     padding:5px;
     border:1px solid #444444;
-    background-color:#181818;
+    background-color: rgba(24, 24, 24, 0.6);
+
+    /* background-color:transparent; */
 }
 
 #addWindow{
@@ -53,6 +61,12 @@ input[type="text"]{
     fill: white;
 }
 
+#editCloseButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+}
+
+
 #addButton:hover{
     background-color: rgb(79, 79, 79);
     fill: white;
@@ -63,14 +77,210 @@ input[type="text"]{
     fill: white;
 }
 
+#dataCopyButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+}
+
+#editButton:hover{
+    background-color: rgb(34, 73, 75);
+    fill: rgb(151, 234, 228);
+}
+
+.isEdit{
+    background-color: rgb(34, 73, 75);
+    fill: rgb(151, 234, 228);
+}
+
 #submitButton:hover{
     fill: lightgreen;
 }
 
 .divData{
-/*     color: rgb(255, 255, 255); */
     text-decoration: underline;
-    height: 50px;
     user-select: none;
     cursor: pointer;
+    margin-left: 10px;
+    color: aqua;
+}
+
+.memoContent{}
+
+#editWindow{
+    position: absolute;
+    width: 50%;
+    height: 30%;
+    background-color: black;
+    border: solid 1px rgb(214, 214, 214);
+    top: 30%;
+    left: 30%;
+}
+
+#editSubmitButton:hover{
+    fill: lightgreen;
+}
+
+#editDeleteButton{
+    fill: rgb(170, 50, 50);
+}
+
+#editDeleteButton:hover{
+    fill: rgb(255, 104, 104);
+}
+
+#deleteKakuninWindow{
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    left: 35%;
+    top: 30%;
+    border: 1px solid rgb(108, 108, 108);
+    background-color: black;
+}
+
+#sakujoNo{
+    fill: rgb(170, 50, 50);
+}
+
+#sakujoNo:hover{
+    fill: rgb(255, 104, 104);
+}
+
+#sakujoExe{
+    fill: rgb(50, 122, 170);
+}
+
+#sakujoExe:hover{
+    fill: rgb(104, 177, 255);
+}
+
+#memoArea{
+    position: absolute;
+    /* overflow:auto; */
+    width:980px;
+    height:715px;
+    left: 33%;
+    border:1px solid #444444;
+    background-color: rgba(24, 24, 24, 0.6);
+    /* background-color:transparent; */
+}
+
+#inputMemo{
+    background-color: rgba(16, 16, 16, 0.7);
+    resize: none;
+    position: absolute;
+    width: 700px;
+    height: 100px;
+    top: 13%;
+    color: aliceblue;
+    /* クリック時のアウトライン非表示 */
+    outline: none;
+    border: solid 1px rgb(86, 86, 86);
+}
+
+#memoAddButton{
+    position: absolute;
+    background-color: transparent;
+    text-decoration: underline;
+    color: aqua;
+    left: 84%;
+    top: 23.7%;
+    border: none;
+    outline: none;
+    user-select: none;
+}
+
+/* メモテーブル */
+table th:nth-child(1){
+    width: 120px;
+}
+
+table th:nth-child(2){
+    width: 180px;
+}
+
+table th:nth-child(3){
+    width: 500px;
+}
+
+table th:nth-child(4){
+    width: 120px;
+}
+
+table {
+    border-collapse: collapse; /* セルの隙間をなくす */
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #737373; /* グリッド線の色と太さを指定 */
+    padding: 8px;           /* セルの内側の余白 */
+}
+
+th {
+    background-color: rgb(20, 20, 20); /* ヘッダーの背景色 */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+td{
+    font-weight: normal;
+}
+
+/* 未・済ボタン */
+.tdButtonOff{
+    height: 30px;
+    width: 40px;
+    background-color: rgba(189, 21, 21, 0.7);
+    color: white;
+    /* font-weight: bold; */
+}
+
+.tdButtonOn{
+    height: 30px;
+    width: 40px;
+    background-color: rgba(86, 86, 86, 0.7);
+    color: white;
+    /* font-weight: bold; */
+}
+
+
+/* 絞込みボックス */
+#bunruiSort{
+    border: none !important;
+    width: 100px;
+    color: aqua;
+    /* color: rgb(137, 137, 137); */
+    background-color: #242424;
+}
+
+#memoSort{
+    border: none !important;
+    width: 300px;
+    color: aqua;
+    /* color: rgb(137, 137, 137); */
+
+    background-color: #242424;
+}
+
+#zyotaiSort{
+    border: none !important;
+    width: 50px;
+    color: aqua;
+    outline: none;
+    user-select: none;
+    background-color: #242424;
+}
+
+#memoTable {
+    overflow-y: auto;
+    height: 67%;
+    box-sizing: border-box; /* パディングやボーダーを高さに含める */
+}
+
+#dictionaries{
+    overflow-y: auto;
+    height: 87%;
+    box-sizing: border-box; /* パディングやボーダーを高さに含める */
 }
