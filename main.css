@@ -321,3 +321,11 @@ td{
     color: aliceblue;
     outline: none;
 }
+
+#clearTag{
+    /* position: absolute; */
+    user-select: none;
+    background-color: transparent;
+    color: rgb(240, 250, 255);
+    border-radius: 8px;
+}

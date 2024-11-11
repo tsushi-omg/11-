@@ -748,7 +748,9 @@ function editByButton(id,jotai){
 //タグボタン
 function tagAction(tag){
     inputBunrui.value=tag;
+    bunruiSort.value=tag;
     inputMemo.focus();
+    load();
 }
 
 
