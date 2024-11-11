@@ -306,6 +306,8 @@ function loadMemo(){
         th4.appendChild(th5);
 
     }
+    judge();
+    judgeLink();
 }
 
 
