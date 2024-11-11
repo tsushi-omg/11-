@@ -22,6 +22,7 @@ var memoTableTbody;
 var inputMemo;
 var inputBunrui;
 var bunruiSort;
+var shortCutSelect;
 
 //変数定義関数
 function hensu(){
@@ -45,6 +46,7 @@ function hensu(){
     inputMemo=document.getElementById('inputMemo');
     inputBunrui=document.getElementById('inputBunrui');
     bunruiSort=document.getElementById('bunruiSort');
+    shortCutSelect=document.getElementById('shortCutSelect');
 }
 
 
@@ -341,12 +343,8 @@ function inputEventDataText(){
 function inputEvent(){
     keywordBox.addEventListener("input",function(event){
 
-        
-
         judgeLink();
         
-
-
     });
 
 }
@@ -399,6 +397,38 @@ function judge(){
             array[i].hidden=true;
         }
     }
+}
+
+//inputイベント　ショートカットセレクト
+
+function inputEventShortCutSelect(){
+    shortCutSelect.addEventListener("input",function(event){
+        
+        switch(shortCutSelect.value){
+            case '':
+                bunruiSort.value="";
+                memoSort.value="";
+                zyotaiSort.value="";
+                load();
+                break;
+
+            case '未タスク':
+                bunruiSort.value="タスク";
+                memoSort.value="";
+                zyotaiSort.value="未";
+                load();
+                break;
+
+            case '未予定':
+                bunruiSort.value="予定";
+                memoSort.value="";
+                zyotaiSort.value="未";
+                load();
+                break;
+        }
+
+    });
+
 }
 
 function setSort(){
@@ -715,6 +745,12 @@ function editByButton(id,jotai){
 
 }
 
+//タグボタン
+function tagAction(tag){
+    inputBunrui.value=tag;
+    inputMemo.focus();
+}
+
 
 
 
@@ -754,4 +790,102 @@ function savaStrage(data){
 function readStrage(){
     var readData = localStorage.getItem("saveData");
     dataText.value=readData;
+}
+
+//背景切替
+const pics = [
+    'https://images.pexels.com/photos/7120851/pexels-photo-7120851.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/8903355/pexels-photo-8903355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/427900/pexels-photo-427900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/1755683/pexels-photo-1755683.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/401107/pexels-photo-401107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/1573424/pexels-photo-1573424.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/96857/pexels-photo-96857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/733853/pexels-photo-733853.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1668928/pexels-photo-1668928.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/858076/pexels-photo-858076.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/21492/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1546901/pexels-photo-1546901.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1124960/pexels-photo-1124960.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/376533/pexels-photo-376533.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/445109/pexels-photo-445109.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/347139/pexels-photo-347139.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/673857/pexels-photo-673857.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/66997/pexels-photo-66997.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/698319/pexels-photo-698319.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1122639/pexels-photo-1122639.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/701337/pexels-photo-701337.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1509534/pexels-photo-1509534.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1755385/pexels-photo-1755385.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/248159/pexels-photo-248159.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/249210/pexels-photo-249210.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/6128127/pexels-photo-6128127.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/12735759/pexels-photo-12735759.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/8523797/pexels-photo-8523797.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3762497/pexels-photo-3762497.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/776656/pexels-photo-776656.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/354939/pexels-photo-354939.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/194096/pexels-photo-194096.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1764702/pexels-photo-1764702.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/414144/pexels-photo-414144.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1037999/pexels-photo-1037999.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/220182/pexels-photo-220182.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/2775196/pexels-photo-2775196.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1289363/pexels-photo-1289363.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/2340254/pexels-photo-2340254.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3293148/pexels-photo-3293148.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1809344/pexels-photo-1809344.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1765033/pexels-photo-1765033.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/776632/pexels-photo-776632.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/2382738/pexels-photo-2382738.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1292998/pexels-photo-1292998.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3310691/pexels-photo-3310691.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/769525/pexels-photo-769525.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/2719301/pexels-photo-2719301.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1022692/pexels-photo-1022692.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3183132/pexels-photo-3183132.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/206064/pexels-photo-206064.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/4050284/pexels-photo-4050284.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1239385/pexels-photo-1239385.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/354939/pexels-photo-354939.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/310435/pexels-photo-310435.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/321552/pexels-photo-321552.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1183434/pexels-photo-1183434.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/160846/french-bulldog-summer-smile-joy-160846.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3317038/pexels-photo-3317038.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/4588428/pexels-photo-4588428.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1661179/pexels-photo-1661179.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/97533/pexels-photo-97533.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/50577/hedgehog-animal-baby-cute-50577.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1335971/pexels-photo-1335971.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1059823/pexels-photo-1059823.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/276514/pexels-photo-276514.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/262367/pexels-photo-262367.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/911758/pexels-photo-911758.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/277559/pexels-photo-277559.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/1568607/pexels-photo-1568607.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/946255/pexels-photo-946255.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3034343/pexels-photo-3034343.jpeg?auto=compress&cs=tinysrgb&w=600'
+];
+let currentIndex=0;
+function switchBG(){
+    currentIndex++;
+    if(currentIndex==pics.length){
+        currentIndex=0;//折り返し
+    }
+    document.body.style.backgroundImage=`url('${pics[currentIndex]}')`;
 }
