@@ -339,23 +339,28 @@ function inputEventDataText(){
 function inputEvent(){
     keywordBox.addEventListener("input",function(event){
 
-        var array = document.getElementsByClassName('divData');
+        
 
-        judge();
+        judgeLink();
+        
 
-        function judge(){
-            for(let i = 0; i < array.length; i++){
-                if(array[i].textContent.indexOf(keywordBox.value) != -1){
-                    array[i].hidden=false;
-                }else{
-                    array[i].hidden=true;
-                }
-            }
-        }
 
     });
 
 }
+
+function judgeLink(){
+    var array = document.getElementsByClassName('divData'); 
+    for(let i = 0; i < array.length; i++){
+        if(array[i].textContent.indexOf(keywordBox.value) != -1){
+            array[i].hidden=false;
+        }else{
+            array[i].hidden=true;
+        }
+    }
+}
+
+
 
 //inputイベント　メモ-分類--ok
 
@@ -393,6 +398,14 @@ function judge(){
         }
     }
 }
+
+function setSort(){
+    setInterval(() => {
+      judge();
+      judgeLink();
+    }, 100);
+}
+
 
 //ctrl + enterでキーワードにフォーカス
 document.addEventListener("keydown", function(event) {
