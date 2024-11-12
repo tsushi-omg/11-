@@ -753,6 +753,7 @@ function tagAction(tag){
         bunruiSort.value="";
         zyotaiSort.value="";
         memoSort.value="";
+        inputBunrui.value="";
     }
     inputMemo.focus();
     load();
