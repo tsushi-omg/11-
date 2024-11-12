@@ -23,6 +23,8 @@ var inputMemo;
 var inputBunrui;
 var bunruiSort;
 var shortCutSelect;
+var linkKensu;
+var memoKensu;
 
 //変数定義関数
 function hensu(){
@@ -47,7 +49,21 @@ function hensu(){
     inputBunrui=document.getElementById('inputBunrui');
     bunruiSort=document.getElementById('bunruiSort');
     shortCutSelect=document.getElementById('shortCutSelect');
+    linkKensu=document.getElementById('linkKensu');
+    memoKensu=document.getElementById('memoKensu');
 }
+
+
+//文字列変換用配列(small英字　large英字　small数字　large数字)
+
+// const smallEn = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "g"];
+
+// const largeEn = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "G"];
+
+const smallNum=[0,1,2,3,4,5,6,7,8,9];
+
+const largeNum=["０","１","２","３","４","５","６","７","８","９"];
+
 
 
 // addボタンクリック時
@@ -267,9 +283,12 @@ function loadMemo(){
         th4.style.color="rgb(255, 255, 255)";
         tr.appendChild(th4);
 
-        //タスク・予定のときは済／未ボタン
+        // 現在のidの値をイベントリスナーに渡す
+        const currentId = id; // ここで現在のidを保存
+
+        //タスク・予定・臨時のときは済／未ボタン
         let th5;
-        if(bunrui=="タスク" || bunrui=="予定"){
+        if(bunrui=="タスク" || bunrui=="予定" || bunrui=="臨時"){
             th5 = document.createElement('button');
             if(zyotai=="未"){
                 th5.classList.add('tdButtonOff');
@@ -281,8 +300,8 @@ function loadMemo(){
             th5.style.userSelect="none";
             th5.style.outline="none";
 
-        // 現在のidの値をイベントリスナーに渡す
-        const currentId = id; // ここで現在のidを保存
+        // // 現在のidの値をイベントリスナーに渡す
+        // const currentId = id; // ここで現在のidを保存
 
         th5.addEventListener('click', function(event) {
             const button = event.currentTarget; // クリックされたボタンを取得
@@ -306,6 +325,21 @@ function loadMemo(){
             th5.textContent="ー";
         }
         th4.appendChild(th5);
+
+        //消去ボタン
+        //親
+        const th6 = document.createElement('td');
+        tr.appendChild(th6);
+        //ボタン
+        const th7 = document.createElement('button');
+        th7.textContent="消去";
+        th7.classList.add("meisaiDeleteButton");
+        th7.style.color="rgb(255, 255, 255)";
+        th7.style.outline="none";
+        th7.addEventListener("click",function(event){
+            deleteMemo(currentId);
+        });
+        th6.appendChild(th7);
 
     }
     judge();
@@ -350,14 +384,17 @@ function inputEvent(){
 }
 
 function judgeLink(){
-    var array = document.getElementsByClassName('divData'); 
+    var array = document.getElementsByClassName('divData');
+    var count=0;
     for(let i = 0; i < array.length; i++){
-        if(array[i].textContent.indexOf(keywordBox.value) != -1){
+        if(convertSmallNum(array[i].textContent.toLowerCase()).indexOf(convertSmallNum(keywordBox.value.toLowerCase())) != -1){
             array[i].hidden=false;
+            count++;
         }else{
             array[i].hidden=true;
         }
     }
+    linkKensu.textContent=`(${count}件)`
 }
 
 
@@ -390,13 +427,16 @@ function inputEventMemoJotai(){
 
 function judge(){
     var array = document.getElementsByClassName('memoContent');
+    var count=0;
     for(let i = 0; i < array.length; i++){
-        if((array[i].children[1].textContent.indexOf(bunruiSort.value) != -1) && (array[i].children[2].textContent.indexOf(memoSort.value) != -1) && (array[i].children[3].textContent.indexOf(zyotaiSort.value) != -1)){
+        if((convertSmallNum(array[i].children[1].textContent.toLowerCase()).indexOf(convertSmallNum(bunruiSort.value.toLowerCase())) != -1) && (convertSmallNum(array[i].children[2].textContent.toLowerCase()).indexOf(convertSmallNum(memoSort.value.toLowerCase())) != -1) && (convertSmallNum(array[i].children[3].textContent.toLowerCase()).indexOf(convertSmallNum(zyotaiSort.value.toLowerCase())) != -1)){
             array[i].hidden=false;
+            count++;
         }else{
             array[i].hidden=true;
         }
     }
+    memoKensu.textContent=`(${count}件)`;
 }
 
 //inputイベント　ショートカットセレクト
@@ -650,7 +690,7 @@ function addMemo(){
 
     //タスク・予定のときは済／未ボタン
     let th5;
-    if(bunrui=="タスク" || bunrui=="予定"){
+    if(bunrui=="タスク" || bunrui=="予定" || bunrui=="臨時"){
         th5 = document.createElement('button');
         th5.classList.add('tdButtonOff');
         th5.classList.add('ml-2');
@@ -664,6 +704,18 @@ function addMemo(){
         th5.textContent="ー";
     }
     th4.appendChild(th5);
+
+    //消去ボタン
+    //親
+    const th6 = document.createElement('td');
+    tr.appendChild(th6);
+    //ボタン
+    const th7 = document.createElement('button');
+    th7.textContent="消去";
+    th7.classList.add("meisaiDeleteButton");
+    th7.style.color="rgb(255, 255, 255)";
+    th7.style.outline="none";
+    th6.appendChild(th7);
 
     //ボックスクリア
     inputBunrui.value="";
@@ -749,11 +801,11 @@ function editByButton(id,jotai){
 function tagAction(tag){
     inputBunrui.value=tag;
     bunruiSort.value=tag;
-    if(tag=="クリア"){
-        bunruiSort.value="";
-        zyotaiSort.value="";
-        memoSort.value="";
+    if(tag=='クリア'){
         inputBunrui.value="";
+        bunruiSort.value="";
+        memoSort.value="";
+        zyotaiSort.value="";
     }
     inputMemo.focus();
     load();
@@ -896,4 +948,64 @@ function switchBG(){
         currentIndex=0;//折り返し
     }
     document.body.style.backgroundImage=`url('${pics[currentIndex]}')`;
+}
+
+
+//引数で渡った全角数字をすべて半角数字に変換して返す関数(変換後同士を比較すればいい)--ok
+function convertSmallNum(text){
+
+    let arrayNum=[];
+
+    //配列に移動
+    for(let i = 0; i < text.length; i++){
+        arrayNum[i]=text[i]
+    }
+
+    //比較
+    for(let i = 0; i < text.length; i++){
+        for(let j = 0; j < largeNum.length; j++){
+            if(text[i]==largeNum[j]){
+                //置換
+                arrayNum[i]=smallNum[j];
+            }
+        }
+    }
+
+    text=arrayNum.join("");
+
+    return text;
+    
+}
+
+//メモ消去ボタン  #--?start?--#?^^id=〇〇^^? ?^^記載日=〇〇^^? ?^^分類=〇〇^^? ?^^メモ=〇〇^^? ?^^状態=〇〇^^?
+function deleteMemo(id){//--ok
+
+    //ボックス読込
+    initArray();
+
+    data=dataText.value;
+
+    var start=0;
+
+    //インデックス取得
+    var a,b;
+    start=data.indexOf(id,0);
+    a=start-19;//データ開始位置
+    start=data.indexOf("?^^状態=",start)+4;
+    b=data.indexOf("^^?",start)+2;
+
+    //消去
+    for(let i = a; i <= b; i++){
+        array[i]="";
+    }
+
+    //data更新
+    inArray();
+
+    //データ文更新
+    dataText.value=data;
+
+    //データ文読込み
+    load();
+    
 }

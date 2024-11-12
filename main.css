@@ -51,7 +51,7 @@ input[type="text"]{
 #dictionary{
     overflow:auto;
     width:580px;
-    height:780px;
+    height:810px;
     padding:5px;
     border:1px solid #444444;
     background-color: rgba(24, 24, 24, 0.6);
@@ -66,7 +66,8 @@ input[type="text"]{
     left: 25%;
     top: 30%;
     border: 1px solid rgb(108, 108, 108);
-    background-color: black;
+    background-color:rgba(0, 0, 0, 0.82);
+    z-index: 10;
 }
 
 #addCloseButton:hover{
@@ -88,6 +89,12 @@ input[type="text"]{
 #reloadButton:hover{
     background-color: rgb(79, 79, 79);
     fill: white;
+}
+
+#pictureButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+    cursor: pointer;
 }
 
 
@@ -129,10 +136,11 @@ input[type="text"]{
     position: absolute;
     width: 50%;
     height: 30%;
-    background-color: black;
+    background-color:rgba(0, 0, 0, 0.82);
     border: solid 1px rgb(214, 214, 214);
     top: 30%;
     left: 30%;
+    z-index: 10;
 }
 
 #editSubmitButton:hover{
@@ -154,7 +162,8 @@ input[type="text"]{
     left: 35%;
     top: 30%;
     border: 1px solid rgb(108, 108, 108);
-    background-color: black;
+    background-color:rgba(0, 0, 0, 0.82);
+    z-index: 10;
 }
 
 #sakujoNo{
@@ -176,8 +185,8 @@ input[type="text"]{
 #memoArea{
     position: absolute;
     /* overflow:auto; */
-    width:980px;
-    height:715px;
+    width:1200px;
+    height:810px;
     left: 33%;
     border:1px solid #444444;
     background-color: rgba(24, 24, 24, 0.6);
@@ -190,7 +199,7 @@ input[type="text"]{
     position: absolute;
     width: 700px;
     height: 100px;
-    top: 13%;
+    top: 11.4%;
     color: aliceblue;
     /* クリック時のアウトライン非表示 */
     outline: none;
@@ -202,8 +211,8 @@ input[type="text"]{
     background-color: transparent;
     text-decoration: underline;
     color: aqua;
-    left: 84%;
-    top: 23.7%;
+    left: 69%;
+    top: 21%;
     border: none;
     outline: none;
     user-select: none;
@@ -219,11 +228,15 @@ table th:nth-child(2){
 }
 
 table th:nth-child(3){
-    width: 500px;
+    width: 600px;
 }
 
 table th:nth-child(4){
     width: 120px;
+}
+
+table th:nth-child(5){
+    width: 100px;
 }
 
 table {
@@ -253,6 +266,7 @@ td{
     width: 40px;
     background-color: rgba(189, 21, 21, 0.7);
     color: white;
+    border-radius: 8px;
     /* font-weight: bold; */
 }
 
@@ -261,6 +275,7 @@ td{
     width: 40px;
     background-color: rgba(86, 86, 86, 0.7);
     color: white;
+    border-radius: 8px;
     /* font-weight: bold; */
 }
 
@@ -294,7 +309,7 @@ td{
 
 #memoTable {
     overflow-y: auto;
-    height: 67%;
+    height: 64%;
     box-sizing: border-box; /* パディングやボーダーを高さに含める */
 }
 
@@ -314,8 +329,8 @@ td{
 
 #shortCutSelect{
     position: absolute;
-    top: 30.4%;
-    left: 0.35%;
+    top: 28.1%;
+    left: 0.8%;
     width: 23px;
     background-color: rgb(0, 0, 0,0.5);
     color: aliceblue;
@@ -323,9 +338,24 @@ td{
 }
 
 #clearTag{
-    /* position: absolute; */
     user-select: none;
     background-color: transparent;
     color: rgb(240, 250, 255);
     border-radius: 8px;
+    /* font-weight: bold; */
+    /* border: dashed 2px rgb(188, 188, 188); */
+}
+
+/* ショートカットタグ */
+#taskTag,#yoteTag,#rinziTag{
+    background-color: rgba(222, 222, 222, 0.7);
+    color: black;
+}
+
+.meisaiDeleteButton{
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: rgb(240, 250, 255);
+    border-radius: 8px;
+    outline: none;
 }
