@@ -749,6 +749,11 @@ function editByButton(id,jotai){
 function tagAction(tag){
     inputBunrui.value=tag;
     bunruiSort.value=tag;
+    if(tag=="クリア"){
+        bunruiSort.value="";
+        zyotaiSort.value="";
+        memoSort.value="";
+    }
     inputMemo.focus();
     load();
 }
