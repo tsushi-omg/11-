@@ -288,7 +288,7 @@ function loadMemo(){
 
         //タスク・予定・臨時のときは済／未ボタン
         let th5;
-        if(bunrui=="タスク" || bunrui=="予定" || bunrui=="臨時"){
+        if(bunrui.indexOf("タスク") || bunrui.indexOf("予定") || bunrui.indexOf("臨時")){
             th5 = document.createElement('button');
             if(zyotai=="未"){
                 th5.classList.add('tdButtonOff');
@@ -688,9 +688,9 @@ function addMemo(){
     th4.style.color="rgb(255, 255, 255)";
     tr.appendChild(th4);
 
-    //タスク・予定のときは済／未ボタン
+    //タスク・予定・臨時が含まれるときは済／未ボタン
     let th5;
-    if(bunrui=="タスク" || bunrui=="予定" || bunrui=="臨時"){
+    if(bunrui.indexOf("タスク") || bunrui.indexOf("予定") || bunrui.indexOf("臨時")){
         th5 = document.createElement('button');
         th5.classList.add('tdButtonOff');
         th5.classList.add('ml-2');
