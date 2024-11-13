@@ -315,7 +315,7 @@ td{
 
 #dictionaries{
     overflow-y: auto;
-    height: 87%;
+    height: 85%;
     box-sizing: border-box; /* パディングやボーダーを高さに含める */
 }
 
