@@ -799,7 +799,8 @@ function editByButton(id,jotai){
 
 //タグボタン
 function tagAction(tag){
-    inputBunrui.value=tag;
+    inputBunrui.value+=tag;
+    inputBunrui.value+="　";
     bunruiSort.value=tag;
     if(tag=='クリア'){
         inputBunrui.value="";
