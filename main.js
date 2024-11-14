@@ -1010,3 +1010,23 @@ function deleteMemo(id){//--ok
     load();
     
 }
+
+
+// //最新の日付順に並べ替える関数(日付降順↓　30 29 28…)
+// function sortDescending(){
+//     var array = document.getElementsByClassName('memoContent');//tr
+//     //並べ替える
+//     array.sort((a,b) => {
+//         const valuea =dateToNumber(a.children[0].textContent);
+//         const valueb =dateToNumber(b.children[0].textContent);
+//         return valuea-valueb
+//     })
+//     array.forEach(row => memoTableTbody.appendChild(array));
+// }
+
+// YYYY-MM-DDをYYYYMMDDの整数に変換 --ok動確済み
+function dateToNumber(date){
+    //ハイフン除去
+    return Number(date.substring(0,4)+date.substring(5,7)+date.substring(8,10));
+    
+}
