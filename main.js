@@ -953,15 +953,40 @@ const pics = [
     'https://images.pexels.com/photos/277559/pexels-photo-277559.jpeg?auto=compress&cs=tinysrgb&w=600',
     'https://images.pexels.com/photos/1568607/pexels-photo-1568607.jpeg?auto=compress&cs=tinysrgb&w=600',
     'https://images.pexels.com/photos/946255/pexels-photo-946255.jpeg?auto=compress&cs=tinysrgb&w=600',
-    'https://images.pexels.com/photos/3034343/pexels-photo-3034343.jpeg?auto=compress&cs=tinysrgb&w=600'
+    'https://images.pexels.com/photos/3034343/pexels-photo-3034343.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://images.pexels.com/photos/3756616/pexels-photo-3756616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/3038740/pexels-photo-3038740.jpeg?auto=compress&cs=tinysrgb&w=600',
+    'https://cdn.pixabay.com/photo/2023/08/21/03/34/droplets-8203505_1280.jpg',
+    'https://cdn.pixabay.com/photo/2021/09/17/11/13/grapes-6632359_640.jpg',
+    'https://cdn.pixabay.com/photo/2019/10/23/19/52/plants-4572694_640.jpg',
+    'https://cdn.pixabay.com/photo/2017/10/25/03/40/guitar-2886886_640.jpg',//フルーツ
+    'https://cdn.pixabay.com/photo/2021/08/03/07/03/orange-6518675_640.jpg',
+    'https://img.freepik.com/free-photo/close-up-view-fruits-slices-concept_23-2148501497.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/premium-photo/colorful-summer-citrus-fruits-slices-background-directly_106885-2722.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/free-photo/grapes-strawberries-pineapple-kiwi-apricot-banana-whole-pineapple_23-2147968680.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/free-photo/colorful-collage-fruits-texture-close-up_23-2149870264.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/free-photo/grapes-strawberries-pineapple-kiwi-apricot-banana-whole-pineapple_23-2147968680.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/premium-photo/fresh-fruit-wooden-table_95419-3819.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/free-photo/flat-lay-tasty-fruits-textures-collage_23-2149763827.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/free-photo/flat-lay-citrus-with-copy-space_23-2148853412.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid',
+    'https://img.freepik.com/free-photo/various-fruits-near-pineapple-leaves_23-2147931386.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid'
 ];
 let currentIndex=0;
+// function switchBG(){
+//     currentIndex++;
+//     if(currentIndex==pics.length){
+//         currentIndex=0;//折り返し
+//     }
+//     document.body.style.backgroundImage=`url('${pics[currentIndex]}')`;
+// }
+
 function switchBG(){
-    currentIndex++;
-    if(currentIndex==pics.length){
-        currentIndex=0;//折り返し
-    }
-    document.body.style.backgroundImage=`url('${pics[currentIndex]}')`;
+    document.body.style.backgroundImage=`url('${pics[randomPics()]}')`;
+}
+
+//ランダム背景
+function randomPics(){
+    return Math.floor(Math.random() * pics.length+1);
 }
 
 

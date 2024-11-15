@@ -82,6 +82,8 @@
         </div>
         <!-- 件数表示 -->
         <label style="position: absolute; top: 95.2%; left: 92%; color: rgba(255, 255, 255, 0.7);" id="memoKensu"></label>
+        <!-- 背景変更ボタン -->
+        <svg id="pictureButton" onclick="switchBG()" style="position: absolute; left:97.5%; top:1%;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/></svg>
     </div>
 
     <!-- 登録ウィンドウ -->
@@ -122,9 +124,6 @@
         <svg onclick="sakujoNo()" class="cursor" id="sakujoNo" style="position: absolute; left: 80%; top: 80.5%;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z"/></svg>
     </div>
 
-    <!-- 背景変更ボタン -->
-    <svg id="pictureButton" onclick="switchBG()" style="position: absolute; left:96.5%; top:2.7%;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/></svg>
-
 
 
     <script>//順番変えない！
@@ -139,6 +138,7 @@
         inputEventMemoDate();
         inputEventShortCutSelect();
         initArray();
+        switchBG();
         
     </script>
 </body>
