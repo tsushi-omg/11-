@@ -728,7 +728,8 @@ function addMemo(){
     var resultData = "#--?start?--#?^^id="+randomID()+"^^??^^記載日="+th.textContent+"^^??^^分類="+bunrui+"^^??^^メモ="+text+"^^??^^状態="+th5.textContent+"^^?";
 
     //データ保存
-    dataText.value += resultData;
+    // dataText.value += resultData;
+    dataText.value = resultData+dataText.value;
 
     //データ文読込み
     load();
