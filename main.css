@@ -307,6 +307,16 @@ td{
     background-color: #242424;
 }
 
+#dateSort{
+    border: none !important;
+    width: 120px;
+    color: aqua;
+    outline: none;
+    user-select: none;
+    background-color: #242424;
+}
+
+
 #memoTable {
     overflow-y: auto;
     height: 64%;

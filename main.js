@@ -25,6 +25,7 @@ var bunruiSort;
 var shortCutSelect;
 var linkKensu;
 var memoKensu;
+var dateSort;
 
 //変数定義関数
 function hensu(){
@@ -51,6 +52,7 @@ function hensu(){
     shortCutSelect=document.getElementById('shortCutSelect');
     linkKensu=document.getElementById('linkKensu');
     memoKensu=document.getElementById('memoKensu');
+    dateSort=document.getElementById('dateSort');
 }
 
 
@@ -425,11 +427,20 @@ function inputEventMemoJotai(){
 
 }
 
+//inputイベント　記載日
+
+function inputEventMemoDate(){
+    dateSort.addEventListener("input",function(event){
+        judge();
+    });
+
+}
+
 function judge(){
     var array = document.getElementsByClassName('memoContent');
     var count=0;
     for(let i = 0; i < array.length; i++){
-        if((convertSmallNum(array[i].children[1].textContent.toLowerCase()).indexOf(convertSmallNum(bunruiSort.value.toLowerCase())) != -1) && (convertSmallNum(array[i].children[2].textContent.toLowerCase()).indexOf(convertSmallNum(memoSort.value.toLowerCase())) != -1) && (convertSmallNum(array[i].children[3].textContent.toLowerCase()).indexOf(convertSmallNum(zyotaiSort.value.toLowerCase())) != -1)){
+        if((convertSmallNum(array[i].children[1].textContent.toLowerCase()).indexOf(convertSmallNum(bunruiSort.value.toLowerCase())) != -1) && (convertSmallNum(array[i].children[2].textContent.toLowerCase()).indexOf(convertSmallNum(memoSort.value.toLowerCase())) != -1) && (convertSmallNum(array[i].children[3].textContent.toLowerCase()).indexOf(convertSmallNum(zyotaiSort.value.toLowerCase())) != -1) && array[i].children[0].textContent.indexOf(dateSort.value) != -1){
             array[i].hidden=false;
             count++;
         }else{
@@ -808,6 +819,7 @@ function tagAction(tag){
         bunruiSort.value="";
         memoSort.value="";
         zyotaiSort.value="";
+        dateSort.value="";
     }
     inputMemo.focus();
     load();

@@ -38,7 +38,7 @@
         <div style="position: absolute; left: 3%; top: 25%;"  id="memoTable" class="mt-4 ml-1">
             <table>
                 <thead style="color: aliceblue; text-decoration: underline;">
-                    <th>記載日</th>
+                    <th><input type="date" id="dateSort"></input></th>
                     <th>分類<input type="text" class="ml-4" id="bunruiSort" placeholder="検索" autocomplete="off"></th>
                     <th>メモ<input type="text" class="ml-4" id="memoSort" placeholder="検索" autocomplete="off"></th>
                     <th>状態
@@ -136,6 +136,7 @@
         inputEventMemoBunrui();
         inputEventMemoNaiyo();
         inputEventMemoJotai();
+        inputEventMemoDate();
         inputEventShortCutSelect();
         initArray();
         
