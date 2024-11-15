@@ -9,6 +9,10 @@ body {
     background-image: url('https://images.pexels.com/photos/401107/pexels-photo-401107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     /* background-image: url(''); */
     /* background-image: url(''); */
+    background-size: cover; /* 画面全体に画像をフィット */
+    background-position: center; /* 画像を中央に配置 */
+    background-repeat: no-repeat; /* 繰り返しを無効に */
+    background-attachment: fixed; /* 背景をスクロールせず固定 */
 
 }
 
