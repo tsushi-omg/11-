@@ -199,7 +199,7 @@ input[type="text"]{
     position: absolute;
     width: 700px;
     height: 100px;
-    top: 11.4%;
+    top: 11.7%;
     color: aliceblue;
     /* クリック時のアウトライン非表示 */
     outline: none;
@@ -212,7 +212,7 @@ input[type="text"]{
     text-decoration: underline;
     color: aqua;
     left: 69%;
-    top: 21%;
+    top: 23.5%;
     border: none;
     outline: none;
     user-select: none;

@@ -33,7 +33,7 @@
         <label style="color: rgb(255, 255, 255); background-color: rgba(79, 79, 79, 0.8);" class="mt-2 ml-2">　m e m o　</label>
         <div id="memoButton">
         <div><label style="color: rgb(255, 255, 255);" class="ml-4 mt-2">分類名：　</label><input type="text" id="inputBunrui" style="color: aliceblue;" placeholder="ここに入力" autocomplete="off"></div>
-        <div><label style="color: rgb(255, 255, 255);" class="ml-4 mt-2">メ　モ：　</label><textarea id="inputMemo" placeholder="メモやタスクを入力"></textarea></div>
+        <div><label style="color: rgb(255, 255, 255); margin-top: 3.2%;" class="ml-4">メ　モ：　</label><textarea class="mt-4" id="inputMemo" placeholder="メモやタスクを入力"></textarea></div>
         <button id="memoAddButton" onclick="addMemo()">追加</button></div>
         <div style="position: absolute; left: 3%; top: 25%;"  id="memoTable" class="mt-4 ml-1">
             <table>
@@ -61,6 +61,7 @@
             <button class="tagButton" onclick="tagAction('予定')" style="outline: none;" id="yoteTag">#予定</button>
             <button class="tagButton" onclick="tagAction('臨時')" style="outline: none;" id="rinziTag">#臨時</button>
             <button class="tagButton" onclick="tagAction('♬')" style="outline: none;">#♬</button>
+            <button class="tagButton" onclick="tagAction('cubase')" style="outline: none;">#cubase</button>
             <button class="tagButton" onclick="tagAction('JS')" style="outline: none;">#JS</button>
             <button class="tagButton" onclick="tagAction('Java')" style="outline: none;">#Java</button>
             <button class="tagButton" onclick="tagAction('html')" style="outline: none;">#html</button>
@@ -70,6 +71,10 @@
             <button class="tagButton" onclick="tagAction('PT')" style="outline: none;">#PT</button>
             <button class="tagButton" onclick="tagAction('実績')" style="outline: none;">#実績</button>
             <button class="tagButton" onclick="tagAction('保留')" style="outline: none;">#保留</button>
+        </div>
+        <div style="position: absolute; top: 10%; left: 27%;">
+            <!-- オンオフボタン付与対象はidでまとめてスタイル設定 -->
+            <button class="tagButton" onclick="tagAction('word')" style="outline: none;">#word</button>
             <button class="tagButton" onclick="tagAction('クリア')" style="outline: none;" id="clearTag">クリア</button>
         </div>
         <!-- ショートカットセレクト -->
