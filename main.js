@@ -26,6 +26,11 @@ var shortCutSelect;
 var linkKensu;
 var memoKensu;
 var dateSort;
+var switchButton;
+var editorArea;
+var memoArea;
+var editTargetArea;
+var hikakuTarget;
 
 //変数定義関数
 function hensu(){
@@ -53,6 +58,12 @@ function hensu(){
     linkKensu=document.getElementById('linkKensu');
     memoKensu=document.getElementById('memoKensu');
     dateSort=document.getElementById('dateSort');
+    switchButton=document.getElementById('switchButton');
+    editorArea=document.getElementById('editorArea');
+    memoArea=document.getElementById('memoArea');
+    editTargetArea=document.getElementById('editTargetArea');
+    hikakuTarget=document.getElementById('hikakuTarget');
+    hikakuResult=document.getElementById('hikakuResult');
 }
 
 
@@ -825,10 +836,42 @@ function tagAction(tag){
     load();
 }
 
+//機能切替ボタン
+var functionKubun=0;
+function switchFunction(){
+    if(functionKubun==0){
+        functionKubun=1;
+        memoArea.hidden=true;
+        editorArea.hidden=false;
+    }else{
+        functionKubun=0;
+        memoArea.hidden=false;
+        editorArea.hidden=true;
+    }
+};
 
+// 比較
+function hikaku(){
+    if(hikakuTarget.value==editTargetArea.value){
+        hikakuResult.textContent="一致";
+        hikakuResult.style.color="aqua";
+    }else{
+        hikakuResult.textContent="不一致";
+        hikakuResult.style.color="red";
+    }
+}
 
+function hikakuTargetEvent(){
+    hikakuTarget.addEventListener("input",function(event){
+        hikaku();
+    })
+};
 
-
+function editTargetAreaEvent(){
+    editTargetArea.addEventListener("input",function(event){
+        hikaku();
+    })
+};
 
 
 

@@ -91,9 +91,35 @@
         </div>
         <!-- 件数表示 -->
         <label style="position: absolute; top: 95.2%; left: 92%; color: rgba(255, 255, 255, 0.7);" id="memoKensu"></label>
-        <!-- 背景変更ボタン -->
-        <svg id="pictureButton" onclick="switchBG()" style="position: absolute; left:97.5%; top:1%;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/></svg>
     </div>
+
+    <!-- エディターエリア -->
+     <div id="editorArea" class="mt-4" hidden>
+        <label style="color: rgb(255, 255, 255); background-color: rgba(79, 79, 79, 0.8);" class="mt-2 ml-2">　e d i t o r　</label>
+        <textarea id="editTargetArea" placeholder="編集対象…"></textarea>
+        <!-- 機能インデックス -->
+        <div id="functionIndex">
+            <button class="tagButton functionSwitchButton" style="outline: none;">置換</button>
+            <button class="tagButton functionSwitchButton" style="outline: none;">比較</button>
+        </div>
+        <!-- 機能詳細エリア -->
+         <div id="functionArea">
+            <!-- 比較 -->
+             <div id="hikakuFunction">
+                <label class="ml-3 mt-2" style="color: aliceblue;">比較対象</label>
+                <div><textarea class="ml-3" id="hikakuTarget"></textarea></div>
+                <label class="ml-3 mt-2" style="color: aliceblue;">判定：</label><label id="hikakuResult" style="color: white;">ー</label>
+             </div>
+         </div>
+
+     </div>
+
+     <!-- 背景変更ボタン -->
+    <svg id="pictureButton" onclick="switchBG()" style="position: absolute; left:96%; top:2.5%;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/></svg>
+
+    <!-- 機能切替ボタン -->
+    <svg id="switchButton" onclick="switchFunction()" style="position: absolute; left:93.7%; top:3.7%;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M627-210q17-33 26-69.5t9-75.5q0-80-35-146.5T532-612l-92 92v-320h320l-92 92q52 47 83 112t31 141q0 91-42.5 165T627-210Zm-427 90 92-92q-53-47-83.5-112T178-465q0-91 42.5-165T334-750q-17 33-26.5 69.5T298-605q0 80 35.5 146.5T428-348l92-92v320H200Z"/></svg>
+
 
     <!-- 登録ウィンドウ -->
     <div id="addWindow" hidden>
@@ -148,6 +174,8 @@
         inputEventShortCutSelect();
         initArray();
         switchBG();
+        hikakuTargetEvent();
+        editTargetAreaEvent();
         
     </script>
 </body>
