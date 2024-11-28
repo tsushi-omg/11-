@@ -421,7 +421,7 @@ td{
     /* background-color:transparent; */    
 }
 
-#functionIndex{
+/* #functionIndex{
     position: absolute;
     width:500px;
     height:720px;
@@ -430,7 +430,7 @@ td{
     outline: none;
     user-select: none;
     color: black;
-}
+} */
 
 .functionSwitchButton{
     background-color: rgba(222, 222, 222, 0.7);
@@ -440,8 +440,9 @@ td{
 #functionArea{
     position: absolute;
     background-color: transparent;
-    border-style: dotted;
-    border-color: rgb(255, 255, 255,0.7);
+    /* border-style: dotted; */
+    border: none;
+    /* border-color: rgb(255, 255, 255,0.7); */
     width: 50%;
     height: 85%;
     left: 47%;
@@ -455,4 +456,57 @@ td{
     outline: none;
     background-color: rgb(0, 0, 0,0.5);
     color: aliceblue;
+}
+
+#functionSelect{
+    position: absolute;
+    left: 48%;
+    top: 7%;
+    border: none !important;
+    width: 200px;
+    color: aqua;
+    outline: none;
+    user-select: none;
+    background-color: #242424;
+}
+
+/* 機能エリア一括操作用　空のクラス */
+.functionClass{}
+
+.forMemo{
+    color: aliceblue;
+    background-color: transparent;
+    outline: none;
+    resize: none;
+    width: 100%;
+    border: none;
+}
+
+#dataText{
+    border-bottom: solid 1px aliceblue;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    outline: none;
+}
+
+/* 行コピー */
+.forRowButton{
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: rgb(240, 250, 255);
+    border-radius: 8px;
+    outline: none;
+}
+
+
+/* 行コピーボタン親div */
+.forRowButtonDiv{}
+
+
+#rowCopyFunction{
+    overflow-y: auto;
+    height: 100%;
+    box-sizing: border-box; /* パディングやボーダーを高さに含める */
 }

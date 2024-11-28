@@ -31,6 +31,10 @@ var editorArea;
 var memoArea;
 var editTargetArea;
 var hikakuTarget;
+var functionSelect;
+var hikakuFunction;
+var rowCopyFunction;
+var rowCopyButtonDiv;
 
 //変数定義関数
 function hensu(){
@@ -64,6 +68,16 @@ function hensu(){
     editTargetArea=document.getElementById('editTargetArea');
     hikakuTarget=document.getElementById('hikakuTarget');
     hikakuResult=document.getElementById('hikakuResult');
+    functionSelect=document.getElementById('functionSelect');
+    hikakuFunction=document.getElementById('hikakuFunction');
+    rowCopyFunction=document.getElementById('rowCopyFunction');
+    rowCopyButtonDiv=document.getElementById('rowCopyButtonDiv');
+}
+
+
+// テスト用関数
+function forTest(){
+    rowCopyFunctionEvent();
 }
 
 
@@ -287,9 +301,15 @@ function loadMemo(){
 
         //メモ
         const th3 = document.createElement('td');
-        th3.textContent=memo;
-        th3.style.color="rgb(255, 255, 255)";
         tr.appendChild(th3);
+
+        const mmemoArea = document.createElement('textarea');
+        mmemoArea.textContent=memo;
+        mmemoArea.readOnly=true;
+        mmemoArea.style.color="rgb(255, 255, 255)";
+        mmemoArea.classList.add('forMemo');
+        th3.appendChild(mmemoArea);
+        adjustHeight(mmemoArea);
 
         //済／未ボタン　親td
         const th4 = document.createElement('td');
@@ -701,9 +721,16 @@ function addMemo(){
 
     //メモ
     const th3 = document.createElement('td');
-    th3.textContent=text;
-    th3.style.color="rgb(255, 255, 255)";
+    // th3.textContent=text;
+    // th3.style.color="rgb(255, 255, 255)";
     tr.appendChild(th3);
+
+    const mmemoArea = document.createElement('textarea');
+    mmemoArea.textContent=text;
+    mmemoArea.readOnly=true;
+    mmemoArea.style.color="rgb(255, 255, 255)";
+    th3.appendChild(mmemoArea);
+    adjustHeight(mmemoArea);
 
     //済／未ボタン　親td
     const th4 = document.createElement('td');
@@ -769,7 +796,7 @@ function getCurrentDate() {
     return `${year}-${month}-${day}`;
 }
 
-// クリップボードにコピーする関数
+// クリップボードにコピーする関数 id引数
 function clipCopy(text) {
     var textnew = document.getElementById(text).value;
     navigator.clipboard.writeText(textnew)
@@ -780,6 +807,19 @@ function clipCopy(text) {
             alert('コピーに失敗しました: ' + err);
         });
 }
+
+// クリップボードにコピーする関数 ※変数引数　アラート無し
+function clipCopyShort(text) {
+    var textnew = text;
+    navigator.clipboard.writeText(textnew)
+        .then(() => {
+            // alert('クリップボードにコピーしました');
+        })
+        .catch(err => {
+            alert('コピーに失敗しました: ' + err);
+        });
+}
+
 
 
 //未・済ボタンクリック時にデータ文書き換え
@@ -859,6 +899,11 @@ function hikaku(){
         hikakuResult.textContent="不一致";
         hikakuResult.style.color="red";
     }
+    //空文字
+    if(hikakuTarget.value=="" && editTargetArea.value==""){
+        hikakuResult.textContent="ー";
+        hikakuResult.style.color="white";
+    }
 }
 
 function hikakuTargetEvent(){
@@ -869,9 +914,218 @@ function hikakuTargetEvent(){
 
 function editTargetAreaEvent(){
     editTargetArea.addEventListener("input",function(event){
-        hikaku();
+        hikaku();//比較
+        rowCopyFunctionEvent();//行別コピー
+        saveEditTarget();//入力保持
     })
 };
+
+
+// 機能別にテキストエリアの入力を保持
+var saveEmpty="";//未選択
+var saveHikaku="";//比較
+var saveRowCopy="";//行ごとにコピー
+
+function saveEditTarget(){
+
+        switch (functionSelect.value){
+
+            case "":{
+                saveEmpty=editTargetArea.value;
+                break;
+            };
+
+            case "比較":{
+                saveHikaku=editTargetArea.value;
+                break;
+            };
+
+            case "小・大文字":{
+                break;
+            };
+
+            case "置換":{
+                break;
+            };
+
+            case "行ごとにコピー":{
+                saveRowCopy=editTargetArea.value;
+                break;
+            };
+
+            case "指定文字区切り":{
+                break;
+            };
+
+            case "並べ替え":{
+                break;
+            };
+            
+        }
+}
+
+
+
+// 機能セレクト　イベント（表示切替、入力値読込）
+function functionSelectEvent(){
+    //空のクラスを付与し、機能エリアを一括操作
+    var arrayFunction = document.getElementsByClassName('functionClass');
+
+    functionSelect.addEventListener("input",function(event){
+
+        switch (functionSelect.value){
+
+            case "":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //load
+                editTargetArea.value=saveEmpty;
+                break;
+            };
+
+            case "比較":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //対象を表示
+                hikakuFunction.hidden=false;
+                //load
+                editTargetArea.value=saveHikaku;
+                break;
+            };
+
+            case "小・大文字":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //対象を表示
+                break;
+            };
+
+            case "置換":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //対象を表示
+                break;
+            };
+
+            case "行ごとにコピー":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //対象を表示
+                rowCopyFunction.hidden=false;
+                //load
+                editTargetArea.value=saveRowCopy;
+                //関数実行
+                rowCopyFunctionEvent();
+                break;
+            };
+
+            case "指定文字区切り":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //対象を表示
+                break;
+            };
+
+            case "並べ替え":{
+                //すべて非表示
+                for(let element of arrayFunction){
+                    element.hidden=true;
+                }
+                //対象を表示
+                break;
+            };
+            
+        }
+    })
+}
+
+
+
+//行ごとコピー
+function rowCopyFunctionEvent(){
+
+    //クリア
+    const elements = [...document.getElementsByClassName('forRowButtonDiv')];
+    for (let element of elements) {
+        element.remove();
+    }
+
+    //改行数
+    var count=countTargetWord(editTargetArea.value,`
+`);
+
+    //最初の行の+1
+    count++;
+
+    //行ごとのテキスト保存用
+    let rowTextArray=[];
+
+    var start = 0;
+    var text = "";
+
+    for(let i = 0; i < count; i++){
+        //一番最後の行
+        if((count-1)==i){
+            text=editTargetArea.value.substring(start);
+        }else{
+            text=editTargetArea.value.substring(start,editTargetArea.value.indexOf(`
+`,start));
+            // 位置更新
+            start=editTargetArea.value.indexOf(`
+`,start)+1;
+        }
+
+        rowTextArray[i]=text;
+
+    }
+
+    //ボタン作成
+    count=rowTextArray.length;
+    for(let i = 0; i < count; i++){
+        if(rowTextArray[i] != ""){
+            //div
+            const parentDiv = document.createElement('div');
+            parentDiv.classList.add('forRowButtonDiv');
+            rowCopyButtonDiv.appendChild(parentDiv);
+            //button
+            const button = document.createElement('button');
+            button.textContent=rowTextArray[i];
+            button.style.color="white";
+            button.style.outline="none";
+            button.classList.add('forRowButton');
+            button.addEventListener("click",function(event){
+                //クリップボードへコピー
+                // const sendText = rowTextArray[i];
+                clipCopyShort(rowTextArray[i]);
+            })
+            parentDiv.appendChild(button);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1110,4 +1364,26 @@ function dateToNumber(date){
     //ハイフン除去
     return Number(date.substring(0,4)+date.substring(5,7)+date.substring(8,10));
     
+}
+
+//height自動調整
+function adjustHeight(textarea) {
+    textarea.style.height = "auto"; // 一旦高さをリセット
+    textarea.style.height = textarea.scrollHeight + 5 +"px"; // 必要な高さに設定
+  }
+
+
+//   対象から指定文字列の数をカウントして返す関数 --ok
+function countTargetWord(target,word){
+    var count=0;
+    var start=0;
+    while(true){
+        if(target.indexOf(word,start) != -1){
+            count++;
+            start=target.indexOf(word,start)+word.length;
+        }else{
+            break;
+        }
+    }
+    return count;
 }
