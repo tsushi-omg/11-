@@ -1109,6 +1109,12 @@ function rowCopyFunctionEvent(){
                 //クリップボードへコピー
                 // const sendText = rowTextArray[i];
                 clipCopyShort(rowTextArray[i]);
+                //自分を下げて周りをそろえる
+                const elements = [...document.getElementsByClassName('forRowButton')];
+                for (let element of elements) {
+                    element.classList.remove('ml-3');
+                }
+                button.classList.add('ml-3');
             })
             parentDiv.appendChild(button);
         }
