@@ -35,6 +35,19 @@ var functionSelect;
 var hikakuFunction;
 var rowCopyFunction;
 var rowCopyButtonDiv;
+var tikanFunction;
+var beforTikanText;
+var afterTikanText;
+var undoButton;
+var redoButton;
+var targetKensuLabel;
+var menuWindow;
+var renderLink;
+var renderData;
+var renderWorking;
+var dataArea;
+var workingArea;
+var renderBG;
 
 //変数定義関数
 function hensu(){
@@ -72,6 +85,20 @@ function hensu(){
     hikakuFunction=document.getElementById('hikakuFunction');
     rowCopyFunction=document.getElementById('rowCopyFunction');
     rowCopyButtonDiv=document.getElementById('rowCopyButtonDiv');
+    tikanFunction=document.getElementById('tikanFunction');
+    beforTikanText=document.getElementById('beforTikanText');
+    afterTikanText=document.getElementById('afterTikanText');
+    undoButton=document.getElementById('undoButton');
+    redoButton=document.getElementById('redoButton');
+    targetKensuLabel=document.getElementById('targetKensuLabel');
+    menuWindow=document.getElementById('menuWindow');
+    renderLink=document.getElementById('renderLink');
+    renderData=document.getElementById('renderData');
+    renderWorking=document.getElementById('renderWorking');
+    dataArea=document.getElementById('dataArea');
+    workingArea=document.getElementById('workingArea');
+    renderBG=document.getElementById('renderBG');
+    
 }
 
 
@@ -801,7 +828,7 @@ function clipCopy(text) {
     var textnew = document.getElementById(text).value;
     navigator.clipboard.writeText(textnew)
         .then(() => {
-            alert('クリップボードにコピーしました');
+            // alert('クリップボードにコピーしました');
         })
         .catch(err => {
             alert('コピーに失敗しました: ' + err);
@@ -883,6 +910,7 @@ function switchFunction(){
         functionKubun=1;
         memoArea.hidden=true;
         editorArea.hidden=false;
+        editTargetArea.focus();
     }else{
         functionKubun=0;
         memoArea.hidden=false;
@@ -917,6 +945,7 @@ function editTargetAreaEvent(){
         hikaku();//比較
         rowCopyFunctionEvent();//行別コピー
         saveEditTarget();//入力保持
+        updateKensu();//置換対象件数　更新
     })
 };
 
@@ -925,6 +954,7 @@ function editTargetAreaEvent(){
 var saveEmpty="";//未選択
 var saveHikaku="";//比較
 var saveRowCopy="";//行ごとにコピー
+var saveTikan="";//置換
 
 function saveEditTarget(){
 
@@ -945,6 +975,7 @@ function saveEditTarget(){
             };
 
             case "置換":{
+                saveTikan=editTargetArea.value;
                 break;
             };
 
@@ -1012,6 +1043,9 @@ function functionSelectEvent(){
                     element.hidden=true;
                 }
                 //対象を表示
+                tikanFunction.hidden=false;
+                //load
+                editTargetArea.value=saveTikan;
                 break;
             };
 
@@ -1123,10 +1157,205 @@ function rowCopyFunctionEvent(){
 
 
 
+//置換実行機能
+function tikanFunctionEvent(){
+    //履歴
+    saveLog();
+    var word1 = beforTikanText.value;
+    var word2 = afterTikanText.value;
+    editTargetArea.value=editTargetArea.value.replace(new RegExp(word1,"g"),word2);
+    //ボックスクリア
+    beforTikanText.value="";
+    afterTikanText.value="";
+    // 件数表示
+    updateKensu();
+    //履歴
+    saveLog();
+}
+
+//入力クリア：編集対象テキストエリア
+function clearTarget(){
+    //履歴
+    saveLog();
+    editTargetArea.value="";
+    //履歴
+    saveLog();
+}
+
+
+// 置換対象ラベル
+function beforTikanTextEvent(){
+    beforTikanText.addEventListener("input",function(event){
+        updateKensu();
+    })
+}
+// 置換対象件数　更新
+function updateKensu(){
+    if(beforTikanText.value==""){
+        targetKensuLabel.textContent="ー件";
+        return;
+    }
+    targetKensuLabel.textContent=`${countTargetWord(editTargetArea.value,beforTikanText.value)}件`;
+}
+
+
+// redo undo初期非活性
+function logButtonInit(){
+    undoButton.classList.add('redoUndoDisabled');
+    redoButton.classList.add('redoUndoDisabled');
+}
+
+function initLogArray(){
+    logArray.push("");
+}
 
 
 
+//履歴保存
+var logIndex=0;
+let logArray=[];
+var undoDisabled=true;
+var redoDisabled=true;
 
+function saveLog(){
+    logArray.splice(logIndex+1);//以降のやりなおし削除
+    if(editTargetArea.value != logArray[logIndex]){
+        logArray.push(editTargetArea.value);//配列に追加
+    }
+    logIndex=logArray.length-1;//配列の最新データに合わせる
+    undoButton.classList.remove('redoUndoDisabled');
+    undoButton.classList.add('hoverButton');
+    undoDisabled=false;
+    redoButton.classList.add('redoUndoDisabled');
+    redoButton.classList.remove('hoverButton');
+    redoDisabled=true;
+    
+}
+
+//undoイベント
+function undoEvent(){
+    if(undoDisabled==true){
+        return;
+    }
+    logIndex--;
+    if(logIndex==0){
+        undoDisabled=true;
+        undoButton.classList.add('redoUndoDisabled');
+        undoButton.classList.remove('hoverButton');
+    }
+    redoDisabled=false;
+    redoButton.classList.remove('redoUndoDisabled');
+    redoButton.classList.add('hoverButton');
+    editTargetArea.value=logArray[logIndex];
+    updateKensu();//置換対象件数　更新
+}
+
+//redoイベント
+function redoEvent(){
+    if(redoDisabled==true){
+        return;
+    }
+    logIndex++;
+    if(logIndex==logArray.length-1){
+        redoDisabled=true;
+        redoButton.classList.add('redoUndoDisabled');
+        redoButton.classList.remove('hoverButton');
+    }
+    undoDisabled=false;
+    undoButton.classList.remove('redoUndoDisabled');
+    undoButton.classList.add('hoverButton');
+    editTargetArea.value=logArray[logIndex];
+    updateKensu();//置換対象件数　更新
+}
+
+//メニューボタン押下
+function openMenu(){
+    createLayer();
+    menuWindow.hidden=false;
+}
+
+//透明レイヤー作成
+function createLayer(){
+    const layer = document.createElement('textarea');
+    layer.style.zIndex=100;
+    layer.readOnly=true;
+    layer.id="transparentLayer";
+    layer.style.outline="none";
+    layer.style.width="100vw";
+    layer.style.height="100vh";
+    layer.style.position="absolute";
+    layer.style.left="0%";
+    layer.style.top="0%";
+    layer.style.userSelect="none";
+    layer.style.resize="none";
+    layer.style.border="none";
+    layer.style.boxSizing="border-box"; 
+    layer.style.backgroundColor="rgba(0,0,0,0.6)"; 
+    layer.addEventListener('click',function(event){
+        deleteLayer();
+        menuWindow.hidden=true;
+    })
+    document.body.appendChild(layer);
+}
+
+// レイヤー削除
+function deleteLayer(){
+    document.getElementById('transparentLayer').remove();
+}
+
+//リンク表示切替
+function renderLinkEvent(){
+    renderLink.addEventListener("input",function(event){
+        if(renderLink.checked==true){
+            dictionary.hidden=false;
+        }else{
+            dictionary.hidden=true;
+        }
+        // memoWindowSwitch();
+    })
+}
+
+//データ文表示切替
+function renderDataEvent(){
+    renderData.addEventListener("input",function(event){
+        if(renderData.checked==true){
+            dataArea.hidden=false;
+        }else{
+            dataArea.hidden=true;
+        }
+        // memoWindowSwitch();
+    })
+}
+
+//進行中表示切替
+function renderWorkingEvent(){
+    renderWorking.addEventListener("input",function(event){
+        if(renderWorking.checked==true){
+            workingArea.hidden=false;
+        }else{
+            workingArea.hidden=true;
+        }
+        // memoWindowSwitch();
+    })
+}
+
+
+// シンプル背景
+function renderBGEvent(){
+    renderBG.addEventListener('input',function(event){
+        document.body.style.backgroundColor = event.target.value;
+        document.body.style.backgroundImage = "none"; // 背景画像を削除
+    })
+}
+
+//リンク、データ文、進行中３つが非表示ならメモ最大化
+// function memoWindowSwitch(){
+//     if(renderLink.checked==false && renderData.checked==false && renderWorking.checked==false){
+//         memoArea.classList.add('memoAreaLarge');
+//     }else{
+//         memoArea.classList.remove('memoAreaLarge');
+//     }
+// }
 
 
 
@@ -1275,13 +1504,6 @@ const pics = [
     'https://img.freepik.com/free-photo/various-fruits-near-pineapple-leaves_23-2147931386.jpg?ga=GA1.1.227649904.1731223005&semt=ais_hybrid'
 ];
 let currentIndex=0;
-// function switchBG(){
-//     currentIndex++;
-//     if(currentIndex==pics.length){
-//         currentIndex=0;//折り返し
-//     }
-//     document.body.style.backgroundImage=`url('${pics[currentIndex]}')`;
-// }
 
 function switchBG(){
     document.body.style.backgroundImage=`url('${pics[randomPics()]}')`;

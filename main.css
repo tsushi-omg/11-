@@ -91,14 +91,28 @@ input[type="text"]{
     fill: white;
 }
 
-#pictureButton:hover{
+#pictureButton{
     background-color: rgb(79, 79, 79);
+}
+
+#pictureButton:hover{
+    background-color: rgb(139, 139, 139);
     fill: white;
     cursor: pointer;
 }
 
 #switchButton:hover{
     background-color: rgb(79, 79, 79);
+    fill: white;
+    cursor: pointer;
+}
+
+#switchWindowButton{
+    background-color: rgb(79, 79, 79);
+}
+
+#switchWindowButton:hover{
+    background-color: rgb(139, 139, 139);
     fill: white;
     cursor: pointer;
 }
@@ -197,6 +211,16 @@ input[type="text"]{
     border:1px solid #444444;
     background-color: rgba(24, 24, 24, 0.6);
     /* background-color:transparent; */
+}
+
+.memoAreaLarge{
+    position: absolute;
+    width:100vw !important;
+    height:100vh !important;
+    left: 0% !important;
+    top: 0% !important;
+    border:1px solid #444444;
+    background-color: rgba(24, 24, 24, 0.6);
 }
 
 #inputMemo{
@@ -409,17 +433,28 @@ td{
 
 #editTargetArea{
     position: absolute;
+    width:468px;
+    /* height:720px; */
+    left: 3%;
+    top: 8%;
+    resize: none;
+    outline: none;
+    color: aliceblue;
+    border:none;
+    background-color: transparent;
+}
+
+#editTargetAreaDiv{
+    position: absolute;
     width:500px;
     height:720px;
     left: 3%;
     top: 7%;
-    resize: none;
-    outline: none;
     color: aliceblue;
     border:1px solid #444444;
     background-color: rgba(24, 24, 24, 0.6);
-    /* background-color:transparent; */    
 }
+
 
 /* #functionIndex{
     position: absolute;
@@ -462,7 +497,8 @@ td{
     position: absolute;
     left: 48%;
     top: 7%;
-    border: none !important;
+    /* border: none !important; */
+    border-color: rgb(71, 71, 71);
     width: 200px;
     color: aqua;
     outline: none;
@@ -509,4 +545,33 @@ td{
     overflow-y: auto;
     height: 100%;
     box-sizing: border-box; /* パディングやボーダーを高さに含める */
+}
+
+.tikanText{
+    background-color: transparent;
+    border-color: rgb(197, 197, 197);
+    color: aliceblue;
+    position: absolute;
+    resize: none;
+    outline: none;
+    width: 550px;
+    height: 100px;
+}
+
+#tikanButton{
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: rgb(240, 250, 255);
+    border-radius: 8px;
+    outline: none;
+}
+
+.hoverButton:hover{
+    background-color: rgb(79, 79, 79);
+    fill: white;
+    cursor: pointer;
+}
+
+.redoUndoDisabled{
+    fill: #888;
 }
