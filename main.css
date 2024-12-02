@@ -1,12 +1,12 @@
-/* 
+
 body{
-    background-color: #000000;
-} */
+    background-color: #aaaaaa;
+}
 
 body {
     /* background-image: url('https://images.pexels.com/photos/7120851/pexels-photo-7120851.jpeg?auto=compress&cs=tinysrgb&w=600'); */
     /* background-image: url('https://images.pexels.com/photos/8903355/pexels-photo-8903355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
-    background-image: url('https://images.pexels.com/photos/401107/pexels-photo-401107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    /* background-image: url('https://images.pexels.com/photos/401107/pexels-photo-401107.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
     /* background-image: url(''); */
     /* background-image: url(''); */
 
@@ -575,3 +575,5 @@ td{
 .redoUndoDisabled{
     fill: #888;
 }
+
+/* 明細保存ボタン */

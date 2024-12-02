@@ -326,17 +326,37 @@ function loadMemo(){
         th2.style.color="rgb(255, 255, 255)";
         tr.appendChild(th2);
 
-        //メモ
-        const th3 = document.createElement('td');
-        tr.appendChild(th3);
+            //メモ親
+            const th3 = document.createElement('td');
+            tr.appendChild(th3);
 
-        const mmemoArea = document.createElement('textarea');
-        mmemoArea.textContent=memo;
-        mmemoArea.readOnly=true;
-        mmemoArea.style.color="rgb(255, 255, 255)";
-        mmemoArea.classList.add('forMemo');
-        th3.appendChild(mmemoArea);
-        adjustHeight(mmemoArea);
+            //イベントリスナーに渡す用
+            const thisID = id;
+
+            // メモ　テキストエリア
+            const mmemoArea = document.createElement('textarea');
+            mmemoArea.textContent=memo;
+            mmemoArea.readOnly=false;
+            mmemoArea.style.color="rgb(255, 255, 255)";
+            mmemoArea.classList.add('forMemo');
+            mmemoArea.addEventListener('input',function(event){
+                adjustHeight(this);
+                saveButton.hidden=false;
+            })
+            th3.appendChild(mmemoArea);
+            adjustHeight(mmemoArea);
+
+            //保存ボタン
+            const saveButton = document.createElement('button');
+            saveButton.textContent="save";
+            saveButton.hidden=true;
+            saveButton.style.outline="none";
+            saveButton.classList.add('tagButton');
+            saveButton.addEventListener('click',function(event){
+                correctMemo(thisID,mmemoArea);
+                this.hidden=true;
+            })
+            th3.appendChild(saveButton);
 
         //済／未ボタン　親td
         const th4 = document.createElement('td');
@@ -752,12 +772,7 @@ function addMemo(){
     // th3.style.color="rgb(255, 255, 255)";
     tr.appendChild(th3);
 
-    const mmemoArea = document.createElement('textarea');
-    mmemoArea.textContent=text;
-    mmemoArea.readOnly=true;
-    mmemoArea.style.color="rgb(255, 255, 255)";
-    th3.appendChild(mmemoArea);
-    adjustHeight(mmemoArea);
+    
 
     //済／未ボタン　親td
     const th4 = document.createElement('td');
@@ -1356,6 +1371,45 @@ function renderBGEvent(){
 //         memoArea.classList.remove('memoAreaLarge');
 //     }
 // }
+
+
+
+
+// メモ編集
+function correctMemo(id,area){
+
+        //ボックス読込
+        initArray();
+
+        data=dataText.value;
+    
+        var start=0;
+    
+        //インデックス取得
+        var a,b;
+        start=data.indexOf(id,0);
+        start=data.indexOf("?^^メモ=",start)+6;//メモ内容開始
+        a=start;
+        start=data.indexOf("^^?",start)-1;
+        b=start;
+    
+        //消去
+        for(let i = a; i <= b; i++){
+            array[i]="";
+        }
+
+        array[a]=area.value;
+    
+        //data更新
+        inArray();
+    
+        //データ文更新
+        dataText.value=data;
+    
+        //データ文読込み
+        load();
+}
+
 
 
 
