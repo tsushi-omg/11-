@@ -246,6 +246,9 @@ function load(){
 }
 
 
+//セーブボタン存在判定
+var isSaveButton=false;
+
 //メモ読込
 function loadMemo(){
 
@@ -341,7 +344,10 @@ function loadMemo(){
             mmemoArea.classList.add('forMemo');
             mmemoArea.addEventListener('input',function(event){
                 adjustHeight(this);
-                saveButton.hidden=false;
+                if(isSaveButton==false){
+                    saveButton.hidden=false;
+                    isSaveButton=true;
+                }
             })
             th3.appendChild(mmemoArea);
             adjustHeight(mmemoArea);
@@ -355,6 +361,7 @@ function loadMemo(){
             saveButton.addEventListener('click',function(event){
                 correctMemo(thisID,mmemoArea);
                 this.hidden=true;
+                isSaveButton=false;
             })
             th3.appendChild(saveButton);
 
