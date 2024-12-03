@@ -1202,6 +1202,7 @@ function clearTarget(){
     editTargetArea.value="";
     //履歴
     saveLog();
+    rowCopyFunctionEvent();//行コピー
 }
 
 
@@ -1270,6 +1271,7 @@ function undoEvent(){
     redoButton.classList.add('hoverButton');
     editTargetArea.value=logArray[logIndex];
     updateKensu();//置換対象件数　更新
+    rowCopyFunctionEvent();//行コピー
 }
 
 //redoイベント
@@ -1288,6 +1290,7 @@ function redoEvent(){
     undoButton.classList.add('hoverButton');
     editTargetArea.value=logArray[logIndex];
     updateKensu();//置換対象件数　更新
+    rowCopyFunctionEvent();//行コピー
 }
 
 //メニューボタン押下
