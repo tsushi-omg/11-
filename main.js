@@ -48,6 +48,7 @@ var renderWorking;
 var dataArea;
 var workingArea;
 var renderBG;
+var keepCheck;
 
 //変数定義関数
 function hensu(){
@@ -98,6 +99,7 @@ function hensu(){
     dataArea=document.getElementById('dataArea');
     workingArea=document.getElementById('workingArea');
     renderBG=document.getElementById('renderBG');
+    keepCheck=document.getElementById('keepCheck');
     
 }
 
@@ -747,6 +749,11 @@ function addMemo(){
     var text = inputMemo.value;
     var bunrui = inputBunrui.value;
 
+    if(bunrui==""){
+        alert("分類名が未入力です。");
+        return;
+    }
+
     if(text==""){
         alert("メモ内容は空白にできません");
         return;
@@ -1187,8 +1194,10 @@ function tikanFunctionEvent(){
     var word2 = afterTikanText.value;
     editTargetArea.value=editTargetArea.value.replace(new RegExp(word1,"g"),word2);
     //ボックスクリア
-    beforTikanText.value="";
-    afterTikanText.value="";
+    if(keepCheck.checked==false){
+        beforTikanText.value="";
+        afterTikanText.value="";
+    }
     // 件数表示
     updateKensu();
     //履歴
@@ -1203,6 +1212,7 @@ function clearTarget(){
     //履歴
     saveLog();
     rowCopyFunctionEvent();//行コピー
+    editTargetArea.focus();
 }
 
 
@@ -1419,6 +1429,8 @@ function correctMemo(id,area){
         //データ文読込み
         load();
 }
+
+
 
 
 
